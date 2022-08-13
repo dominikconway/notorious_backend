@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
     res.send('Hello World')
 })
 
+// index
 app.get('/notes', async (req, res) => {
     try {
         res.json(await Notes.find({}))
@@ -42,14 +43,7 @@ app.get('/notes', async (req, res) => {
     }
 })
 
-app.post('/notes', async (req, res) => {
-    try {
-        res.json(await Notes.create(req.body))
-    } catch (error) {
-        res.status(400).json(error)
-    }
-})
-
+// delete
 app.delete('/notes/:id', async (req, res) => {
     try {
         res.json(await Notes.findByIdAndRemove(req.params.id))
@@ -58,11 +52,30 @@ app.delete('/notes/:id', async (req, res) => {
     }
 })
 
+// update
 app.put('/notes/:id', async (req, res) => {
     try {
         res.json(
             await Notes.findByIdAndUpdate(req.params.id, req.body, {new:true})
         )
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
+// create
+app.post('/notes', async (req, res) => {
+    try {
+        res.json(await Notes.create(req.body))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
+// show
+app.get('/notes/:id', async (req, res) => {
+    try {
+        res.json(await Notes.findById(req.params.id))
     } catch (error) {
         res.status(400).json(error)
     }
