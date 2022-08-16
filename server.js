@@ -19,7 +19,7 @@ mongoose.connection
 const NotesSchema = new mongoose.Schema({
     title: String,
     memo: String,
-    date: Date,
+    date: Date
 })
 
 const Notes = mongoose.model('Notes', NotesSchema)
@@ -27,12 +27,6 @@ const Notes = mongoose.model('Notes', NotesSchema)
 app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())
-
-
-// test route
-app.get('/', (req, res) => {
-    res.send('Hello World')
-})
 
 // index
 app.get('/notes', async (req, res) => {
